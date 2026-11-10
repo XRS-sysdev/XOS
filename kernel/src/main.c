@@ -3,6 +3,8 @@
 #include <stdbool.h>
 #include "../limine-protocol/include/limine.h"
 
+#include "gdt.h"
+
 __attribute__((used, section(".limine_requests"))) static volatile uint64_t limine_base_revision[] = LIMINE_BASE_REVISION(6);
 
 __attribute__((used, section(".limine_requests"))) static volatile struct limine_framebuffer_request framebuffer_request = {
@@ -26,6 +28,8 @@ void kmain(void) {
     if (framebuffer_request.response == NULL || framebuffer_request.response->framebuffer_count < 1) {
         hcf();
     }
+
+    init_gdt();
 
     hcf();
 }
