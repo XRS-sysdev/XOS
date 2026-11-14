@@ -5,6 +5,7 @@
 
 #include "gdt.h"
 #include "tss.h"
+#include "idt.h"
 
 __attribute__((used, section(".limine_requests"))) static volatile uint64_t limine_base_revision[] = LIMINE_BASE_REVISION(6);
 
@@ -32,6 +33,9 @@ void kmain(void) {
 
     init_gdt();
     init_tss(0x0);
+    init_idt();
+
+    __asm__ volatile("int $0x0");
 
     hcf();
 }
