@@ -14,7 +14,7 @@ extern void isr28(); extern void isr29(); extern void isr30(); extern void isr31
 
 void set_idt_gate(int num, uint64_t handler, uint8_t ist, uint8_t flags) {
     idt[num].offset_low  = handler & 0xFFFF;
-    idt[num].selector    = 0x08; // Kernel Code Segment in your GDT
+    idt[num].selector    = 0x08;
     idt[num].ist         = ist;
     idt[num].attributes  = flags;
     idt[num].offset_mid  = (handler >> 16) & 0xFFFF;
