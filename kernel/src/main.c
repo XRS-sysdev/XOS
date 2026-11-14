@@ -4,6 +4,7 @@
 #include "../limine-protocol/include/limine.h"
 
 #include "gdt.h"
+#include "tss.h"
 
 __attribute__((used, section(".limine_requests"))) static volatile uint64_t limine_base_revision[] = LIMINE_BASE_REVISION(6);
 
@@ -30,6 +31,7 @@ void kmain(void) {
     }
 
     init_gdt();
+    init_tss(0x0);
 
     hcf();
 }
